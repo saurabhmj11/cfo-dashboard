@@ -1,0 +1,42 @@
+# Core
+fastapi>=0.100.0
+uvicorn[standard]>=0.22.0
+pydantic>=2.0.0
+python-dotenv>=1.0.0
+python-multipart>=0.0.6
+
+# Database
+sqlalchemy>=2.0.0
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+openpyxl>=3.1.0
+pdfplumber>=0.9.0
+
+# AI/ML
+google-generativeai>=0.3.0
+sentence-transformers>=2.2.0
+chromadb>=0.4.0
+
+# Market Data
+yfinance>=0.2.0
+
+# Security
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.0
+
+# Reports
+reportlab>=4.0.0
+xlsxwriter>=3.1.0
+
+# HTTP
+requests>=2.31.0
+httpx>=0.24.0
+
+# Optional: Production
+# psycopg2-binary>=2.9.0  # PostgreSQL
+# redis>=4.5.0             # Redis cache
+# gunicorn>=21.0.0         # Production server
+
+aio-pika>=9.4.1

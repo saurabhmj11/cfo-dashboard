@@ -1,0 +1,190 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.2, pytest-9.0.2, pluggy-1.6.0 -- C:\Python312\python.exe
+cachedir: .pytest_cache
+rootdir: F:\product\dashboard\financial_analyst
+plugins: anyio-4.8.0, Faker-37.8.0, langsmith-0.3.45, typeguard-4.5.1
+collecting ... collected 0 items / 1 error
+
+=================================== ERRORS ====================================
+______________ ERROR collecting tests/test_intelligent_router.py ______________
+C:\Python312\Lib\site-packages\chromadb\utils\embedding_functions.py:384: in __init__
+    self.ort = importlib.import_module("onnxruntime")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+<frozen importlib._bootstrap_external>:995: in exec_module
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+C:\Python312\Lib\site-packages\onnxruntime\__init__.py:57: in <module>
+    raise import_capi_exception
+C:\Python312\Lib\site-packages\onnxruntime\__init__.py:23: in <module>
+    from onnxruntime.capi._pybind_state import ExecutionMode  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Python312\Lib\site-packages\onnxruntime\capi\_pybind_state.py:32: in <module>
+    from .onnxruntime_pybind11_state import *  # noqa
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ImportError
+
+During handling of the above exception, another exception occurred:
+tests\test_intelligent_router.py:4: in <module>
+    from app.services.agents.orchestrator import FinancialOrchestrator
+app\services\agents\orchestrator.py:8: in <module>
+    from app.services.agents.research_analyst import ResearchAnalyst
+app\services\agents\research_analyst.py:8: in <module>
+    from app.services.vector_service import vector_service
+app\services\vector_service.py:12: in <module>
+    import chromadb
+C:\Python312\Lib\site-packages\chromadb\__init__.py:3: in <module>
+    from chromadb.api.client import Client as ClientCreator
+C:\Python312\Lib\site-packages\chromadb\api\__init__.py:7: in <module>
+    from chromadb.api.models.Collection import Collection
+C:\Python312\Lib\site-packages\chromadb\api\models\Collection.py:57: in <module>
+    class Collection(BaseModel):
+C:\Python312\Lib\site-packages\chromadb\api\models\Collection.py:74: in Collection
+    ] = ef.DefaultEmbeddingFunction(),  # type: ignore
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Python312\Lib\site-packages\chromadb\utils\embedding_functions.py:551: in DefaultEmbeddingFunction
+    return ONNXMiniLM_L6_V2()
+           ^^^^^^^^^^^^^^^^^^
+C:\Python312\Lib\site-packages\chromadb\utils\embedding_functions.py:386: in __init__
+    raise ValueError(
+E   ValueError: The onnxruntime python package is not installed. Please install it with `pip install onnxruntime`
+------------------------------- Captured stderr -------------------------------
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.2.6 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Python312\Scripts\pytest.exe\__main__.py", line 6, in <module>
+    sys.exit(console_main())
+  File "C:\Python312\Lib\site-packages\_pytest\config\__init__.py", line 223, in console_main
+    code = main()
+  File "C:\Python312\Lib\site-packages\_pytest\config\__init__.py", line 199, in main
+    ret: ExitCode | int = config.hook.pytest_cmdline_main(config=config)
+  File "C:\Python312\Lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Python312\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Python312\Lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Python312\Lib\site-packages\_pytest\main.py", line 365, in pytest_cmdline_main
+    return wrap_session(config, _main)
+  File "C:\Python312\Lib\site-packages\_pytest\main.py", line 318, in wrap_session
+    session.exitstatus = doit(config, session) or 0
+  File "C:\Python312\Lib\site-packages\_pytest\main.py", line 371, in _main
+    config.hook.pytest_collection(session=session)
+  File "C:\Python312\Lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Python312\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Python312\Lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Python312\Lib\site-packages\_pytest\main.py", line 382, in pytest_collection
+    session.perform_collect()
+  File "C:\Python312\Lib\site-packages\_pytest\main.py", line 857, in perform_collect
+    self.items.extend(self.genitems(node))
+  File "C:\Python312\Lib\site-packages\_pytest\main.py", line 1020, in genitems
+    rep, duplicate = self._collect_one_node(node, handle_dupes)
+  File "C:\Python312\Lib\site-packages\_pytest\main.py", line 883, in _collect_one_node
+    rep = collect_one_node(node)
+  File "C:\Python312\Lib\site-packages\_pytest\runner.py", line 576, in collect_one_node
+    rep: CollectReport = ihook.pytest_make_collect_report(collector=collector)
+  File "C:\Python312\Lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Python312\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Python312\Lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Python312\Lib\site-packages\_pytest\runner.py", line 400, in pytest_make_collect_report
+    call = CallInfo.from_call(
+  File "C:\Python312\Lib\site-packages\_pytest\runner.py", line 353, in from_call
+    result: TResult | None = func()
+  File "C:\Python312\Lib\site-packages\_pytest\runner.py", line 398, in collect
+    return list(collector.collect())
+  File "C:\Python312\Lib\site-packages\_pytest\python.py", line 563, in collect
+    self._register_setup_module_fixture()
+  File "C:\Python312\Lib\site-packages\_pytest\python.py", line 576, in _register_setup_module_fixture
+    self.obj, ("setUpModule", "setup_module")
+  File "C:\Python312\Lib\site-packages\_pytest\python.py", line 289, in obj
+    self._obj = obj = self._getobj()
+  File "C:\Python312\Lib\site-packages\_pytest\python.py", line 560, in _getobj
+    return importtestmodule(self.path, self.config)
+  File "C:\Python312\Lib\site-packages\_pytest\python.py", line 507, in importtestmodule
+    mod = import_path(
+  File "C:\Python312\Lib\site-packages\_pytest\pathlib.py", line 587, in import_path
+    importlib.import_module(module_name)
+  File "C:\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "C:\Python312\Lib\site-packages\_pytest\assertion\rewrite.py", line 197, in exec_module
+    exec(co, module.__dict__)
+  File "F:\product\dashboard\financial_analyst\tests\test_intelligent_router.py", line 4, in <module>
+    from app.services.agents.orchestrator import FinancialOrchestrator
+  File "F:\product\dashboard\financial_analyst\app\services\agents\orchestrator.py", line 8, in <module>
+    from app.services.agents.research_analyst import ResearchAnalyst
+  File "F:\product\dashboard\financial_analyst\app\services\agents\research_analyst.py", line 8, in <module>
+    from app.services.vector_service import vector_service
+  File "F:\product\dashboard\financial_analyst\app\services\vector_service.py", line 12, in <module>
+    import chromadb
+  File "C:\Python312\Lib\site-packages\chromadb\__init__.py", line 3, in <module>
+    from chromadb.api.client import Client as ClientCreator
+  File "C:\Python312\Lib\site-packages\chromadb\api\__init__.py", line 7, in <module>
+    from chromadb.api.models.Collection import Collection
+  File "C:\Python312\Lib\site-packages\chromadb\api\models\Collection.py", line 57, in <module>
+    class Collection(BaseModel):
+  File "C:\Python312\Lib\site-packages\chromadb\api\models\Collection.py", line 74, in Collection
+    ] = ef.DefaultEmbeddingFunction(),  # type: ignore
+  File "C:\Python312\Lib\site-packages\chromadb\utils\embedding_functions.py", line 551, in DefaultEmbeddingFunction
+    return ONNXMiniLM_L6_V2()
+  File "C:\Python312\Lib\site-packages\chromadb\utils\embedding_functions.py", line 384, in __init__
+    self.ort = importlib.import_module("onnxruntime")
+  File "C:\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "C:\Python312\Lib\site-packages\onnxruntime\__init__.py", line 23, in <module>
+    from onnxruntime.capi._pybind_state import ExecutionMode  # noqa: F401
+  File "C:\Python312\Lib\site-packages\onnxruntime\capi\_pybind_state.py", line 32, in <module>
+    from .onnxruntime_pybind11_state import *  # noqa
+Traceback (most recent call last):
+  File "C:\Python312\Lib\site-packages\numpy\core\_multiarray_umath.py", line 44, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.2.6 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+============================== warnings summary ===============================
+app\models\schemas.py:119
+  F:\product\dashboard\financial_analyst\app\models\schemas.py:119: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Tenant(TenantBase):
+
+app\models\schemas.py:142
+  F:\product\dashboard\financial_analyst\app\models\schemas.py:142: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class User(UserBase):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+ERROR tests/test_intelligent_router.py - ValueError: The onnxruntime python p...
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+======================== 2 warnings, 1 error in 1.88s =========================

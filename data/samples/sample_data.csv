@@ -1,0 +1,37 @@
+Date,Revenue,Expenses,Category,Description
+2023-01-05,45000,12000,Sales,Enterprise License - Acme Corp
+2023-01-15,32000,15000,Services,Implementation Fees
+2023-01-28,0,25000,Operations,Server Costs AWS
+2023-02-02,48000,13000,Sales,Enterprise License - Beta Ltd
+2023-02-14,35000,16000,Services,Consulting Retainer
+2023-02-28,0,26000,Operations,Server Costs AWS
+2023-03-05,52000,14000,Sales,Enterprise License - Gamma Inc
+2023-03-20,38000,18000,Services,Custom Dev Work
+2023-03-28,0,28000,Operations,Server Costs AWS
+2023-04-10,58000,15000,Sales,Enterprise License - Delta Co
+2023-04-22,41000,20000,Services,Training Session
+2023-04-30,0,29000,Operations,Server Costs AWS
+2023-05-05,62000,18000,Sales,Enterprise Renewal
+2023-05-18,44000,22000,Services,Implementation Fees
+2023-05-28,0,30000,Operations,Server Costs AWS
+2023-06-12,70000,21000,Sales,Global License Deal
+2023-06-25,48000,25000,Services,Priority Support
+2023-06-30,0,32000,Operations,Server Costs AWS
+2023-07-08,75000,23000,Sales,Expansion Pack
+2023-07-20,51000,27000,Services,Consulting
+2023-07-31,0,35000,Operations,Server Costs AWS (Scale Up)
+2023-08-05,82000,25000,Sales,Enterprise License
+2023-08-18,55000,28000,Services,Implementation
+2023-08-30,0,36000,Operations,Infrastructure
+2023-09-12,88000,28000,Sales,Q3 Closing
+2023-09-25,58000,30000,Services,Support Contract
+2023-09-30,0,38000,Operations,Infrastructure
+2023-10-05,95000,32000,Sales,Enterprise Deal
+2023-10-20,62000,33000,Services,Consulting
+2023-10-31,0,40000,Operations,Infrastructure
+2023-11-08,105000,35000,Sales,Black Friday Deal
+2023-11-22,68000,36000,Services,Implementation
+2023-11-30,0,42000,Operations,Infrastructure
+2023-12-10,120000,40000,Sales,Year End Close
+2023-12-20,75000,38000,Services,Pre-payment
+2023-12-31,0,45000,Operations,Infrastructure & Bonuses

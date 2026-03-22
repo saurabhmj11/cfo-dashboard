@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # Layer 2: Golden Data Store
+  db:
+    image: postgres:13-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: financial_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Layer 2b: Asynchronous Message Broker
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  # Layer 3: Deterministic Analytics & Math (Microservice)
+  analytics_engine:
+    build: ./backend_services/analytics
+    restart: always
+    environment:
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+    depends_on:
+      - rabbitmq
+    ports:
+      - "8002:8002"
+
+  # Layers 1, 4: Ingestion & API Gateway
+  backend:
+    build: ./app
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/financial_db
+      - ANALYTICS_URL=http://analytics_engine:8002
+      - ORCHESTRATOR_URL=http://ai_orchestrator:8001
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+    depends_on:
+      - db
+      - analytics_engine
+      - rabbitmq
+
+  # Layer 5, 6: AI Orchestrator (Generative Logic)
+  ai_orchestrator:
+    build: ./backend_services/ai_orchestrator
+    restart: always
+    ports:
+      - "8001:8001"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+    depends_on:
+      - rabbitmq
+
+  # Layer 6: Enterprise Experience
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
