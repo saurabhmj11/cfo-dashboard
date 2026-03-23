@@ -5,20 +5,21 @@ from app.models.db_models import Dataset, AnalysisRun, User, Transaction
 from app.models.schemas import FinancialAnalysisResult, DetectiveReport, ForecastReport, AdvisorReport
 from app.models import schemas
 from app.dependencies import get_current_user
-from app.services.validator import DataValidator
-from app.dependencies import get_current_user
-from fastapi.responses import Response
-from app.dependencies import get_current_user
-from fastapi.responses import Response
-from pydantic import BaseModel
+from app.services.analytics.analytics import AnalyticsEngine
+from app.services.analytics.wargame_engine import wargame_engine
+from app.services.agents.orchestrator import FinancialOrchestrator
+from app.services.audit import audit_service
+from app.services.analytics.pipeline import run_monolith_analysis_pipeline
+from fastapi import BackgroundTasks
+import httpx
 import os
 import shutil
 import uuid
 
 router = APIRouter(prefix="/api/v1", tags=["Analysis"])
 
-@router.post("/analyze")
 async def analyze_financial_data(
+    background_tasks: BackgroundTasks,
     file: UploadFile = File(...), 
     db: Session = Depends(get_db),
     user: User = Depends(get_current_user)
@@ -74,20 +75,15 @@ async def analyze_financial_data(
         db.commit()
         api_run_id = analysis_run.id
         
-        # 7. Publish to RabbitMQ to start Async pipeline
-        tx_data = [
-            {"date": str(t.txn_date), "revenue": t.revenue, "expenses": t.expenses, "category": t.category}
-            for t in created_transactions
-        ]
-        
-        from app.services.rabbitmq_client import publish_message
-        await publish_message("Data.Uploaded", {
-            "run_id": api_run_id,
-            "dataset_id": dataset.id,
-            "tenant_id": user.tenant_id,
-            "user_id": user.id,
-            "tx_data": tx_data
-        })
+        # 7. Start Async pipeline directly (Monolith)
+        background_tasks.add_task(
+            run_monolith_analysis_pipeline,
+            db_session_factory=get_db, # We need a factory for new threads
+            run_id=api_run_id,
+            dataset_id=dataset.id,
+            tenant_id=user.tenant_id,
+            user_id=user.id
+        )
 
         # --- Layer 7: Audit Log ---
         audit_service.log_action(
@@ -219,28 +215,16 @@ def run_simulation(
     # 3. Use 'financials' key if present (new schema), else raw (legacy)
     financials = metrics.get("financials", metrics)
 
-    # 4. Run Wargame (Microservice Call)
-    ANALYTICS_URL = os.getenv("ANALYTICS_URL", "http://localhost:8002")
-    
-    # We must use httpx synchronously because this route is currently 'def' not 'async def'
+    # 4. Run Wargame (Direct Call)
     try:
-        with httpx.Client() as client:
-            res = client.post(
-                f"{ANALYTICS_URL}/api/v1/simulate",
-                json={
-                    "baseline_metrics": financials,
-                    "setup": {
-                        "scenario_name": setup.scenario_name,
-                        "growth_factor": setup.growth_factor,
-                        "churn_factor": setup.churn_factor
-                    }
-                }
-            )
-            if res.status_code != 200:
-                raise HTTPException(status_code=500, detail="Analytics simulation failed.")
-            simulation_result = res.json().get("data", {})
+        simulation_result = wargame_engine.simulate(
+            baseline_metrics=financials,
+            strategy=setup.scenario_name,
+            growth_factor=setup.growth_factor,
+            churn_factor=setup.churn_factor
+        )
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Simulation service error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Simulation error: {str(e)}")
     
     return {
         "status": "success",
@@ -264,26 +248,16 @@ def commit_simulation(
     metrics = run.metrics_result if isinstance(run.metrics_result, dict) else dict(run.metrics_result)
     financials = metrics.get("financials", metrics)
 
-    # 2. Run Simulation (Microservice Call)
-    ANALYTICS_URL = os.getenv("ANALYTICS_URL", "http://localhost:8002")
+    # 2. Run Simulation (Direct Call)
     try:
-        with httpx.Client() as client:
-            res = client.post(
-                f"{ANALYTICS_URL}/api/v1/simulate",
-                json={
-                    "baseline_metrics": financials,
-                    "setup": {
-                        "scenario_name": setup.scenario_name,
-                        "growth_factor": setup.growth_factor,
-                        "churn_factor": setup.churn_factor
-                    }
-                }
-            )
-            if res.status_code != 200:
-                raise HTTPException(status_code=500, detail="Analytics simulation failed.")
-            simulation_result = res.json().get("data", {})
+        simulation_result = wargame_engine.simulate(
+            baseline_metrics=financials,
+            strategy=setup.scenario_name,
+            growth_factor=setup.growth_factor,
+            churn_factor=setup.churn_factor
+        )
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Simulation service error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Simulation error: {str(e)}")
     
     # 3. Create New AnalysisRun (The Fork)
     # We construct a synthetic 'metrics' object that looks like the real one but with simulated data

@@ -10,7 +10,8 @@ sqlalchemy>=2.0.0
 
 # Data Processing
 pandas>=2.0.0
-numpy>=1.24.0
+numpy<2.0.0
+onnxruntime
 openpyxl>=3.1.0
 pdfplumber>=0.9.0
 

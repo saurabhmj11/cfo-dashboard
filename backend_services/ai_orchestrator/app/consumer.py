@@ -70,6 +70,50 @@ async def process_message(message: aio_pika.IncomingMessage):
             except Exception:
                 pass
 
+async def process_paperclip_task(message: aio_pika.IncomingMessage):
+    async with message.process():
+        try:
+            task = json.loads(message.body.decode())
+            task_id = task.get('id')
+            description = task.get('description', 'No description provided')
+            logger.info(f"Received Paperclip Task {task_id}: {description}")
+            
+            # For Paperclip tasks, we might not have a full AnalysisPayload yet.
+            # We can either:
+            # 1. Expect the payload in the 'data' field of the task
+            # 2. Or use the description to trigger a general research task
+            
+            data = task.get('data', {})
+            if "analysis_payload" in data:
+                analysis_payload = AnalysisPayload(**data["analysis_payload"])
+                result = orchestrator.run_analysis(analysis_payload)
+            else:
+                # Use the new Paperclip-native research flow
+                result = await orchestrator.run_research(description)
+
+            # Publish result back (The adapter will need to pick this up)
+            out_payload = {
+                "paperclip_task_id": task_id,
+                "result": result,
+                "status": "COMPLETED"
+            }
+            
+            connection = await aio_pika.connect_robust(RABBITMQ_URL)
+            async with connection:
+                channel = await connection.channel()
+                await channel.declare_queue("Paperclip.Results", durable=True)
+                await channel.default_exchange.publish(
+                    aio_pika.Message(
+                        body=json.dumps(out_payload, default=str).encode(),
+                        delivery_mode=aio_pika.DeliveryMode.PERSISTENT
+                    ),
+                    routing_key="Paperclip.Results",
+                )
+                logger.info(f"Published results for Paperclip Task {task_id}")
+                
+        except Exception as e:
+            logger.error(f"Failed to process Paperclip task: {str(e)}")
+
 async def start_consumer():
     while True:
         try:
@@ -77,12 +121,27 @@ async def start_consumer():
             async with connection:
                 channel = await connection.channel()
                 await channel.set_qos(prefetch_count=1)
-                queue = await channel.declare_queue("Analysis.NeedsDeepDive", durable=True)
                 
-                logger.info("Waiting for messages on Analysis.NeedsDeepDive")
-                async with queue.iterator() as queue_iter:
-                    async for message in queue_iter:
-                        await process_message(message)
+                # Listen to existing queue
+                deep_dive_queue = await channel.declare_queue("Analysis.NeedsDeepDive", durable=True)
+                # Listen to Paperclip queue
+                paperclip_queue = await channel.declare_queue("analysis_queue", durable=True)
+                
+                logger.info("Waiting for messages on Analysis.NeedsDeepDive and analysis_queue")
+                
+                # Consume from both
+                async def consume_deep_dive():
+                    async with deep_dive_queue.iterator() as queue_iter:
+                        async for message in queue_iter:
+                            await process_message(message)
+
+                async def consume_paperclip():
+                    async with paperclip_queue.iterator() as queue_iter:
+                        async for message in queue_iter:
+                            await process_paperclip_task(message)
+
+                await asyncio.gather(consume_deep_dive(), consume_paperclip())
+                
         except Exception as e:
             logger.warning(f"Connection lost, retrying in 5s... ({str(e)})")
             await asyncio.sleep(5)

@@ -21,21 +21,25 @@ This platform is a comprehensive **AI Financial Analyst** designed for scale and
 
 ## 🏗️ Architecture
 
-The system is decoupled into specialized microservices, facilitating independent scaling and robust fault tolerance.
+The system is decoupled into specialized microservices, with **Paperclip v0.3.1** serving as the high-level orchestration control plane for governance and budget management.
 
 ```mermaid
 graph TD
-    User([👨‍💼 User]) ---|HTTP / WebSocket| Gateway(🖥️ Next.js Frontend)
+    User([👨‍💼 User]) ---|UI/Tasks| PC(📎 Paperclip Control Plane)
+    PC ===|Orchestration| Adapter(🐍 Python Adapter)
+    Adapter ---|Queue Tasks| Broker((🐇 RabbitMQ Broker))
     
-    Gateway ===|REST API| API_Gateway(⚡ FastAPI Backend Gateway)
-    
-    subgraph Microservices Workspace
-        API_Gateway ---|Asynchronous Tasks| Broker((🐇 RabbitMQ Broker))
-        Broker --- Analytics(🧮 Analytics Engine \n Deterministic Math)
-        Broker --- AI(🤖 AI Orchestrator \n Generative Logic via Gemini)
+    subgraph Autonomous Workforce
+        Broker --- Detective(🕵️ Detective Agent)
+        Broker --- Forecaster(📈 Forecaster Agent)
+        Broker --- Advisor(👔 Advisor Agent)
     end
     
-    API_Gateway --- DB[(🐘 PostgreSQL Store)]
+    Detective --- Analytics(🧮 Analytics Engine)
+    Forecaster --- AI(🤖 Gemini AI Orchestrator)
+    Advisor --- AI
+    
+    API_Gateway(⚡ FastAPI Gateway) --- DB[(🐘 PostgreSQL Store)]
     Analytics --- DB
     AI --- DB
 ```
@@ -44,12 +48,11 @@ graph TD
 
 ## ✨ Key Capabilities
 
-🚀 **Microservices Architecture:** Independently scalable components (Gateway, Analytics, AI Orchestrator) communicating asynchronously via RabbitMQ.  
-📈 **Real-Time Data Streams:** Live market quotes and continuous updates via WebSockets.  
-🧠 **Generative AI & RAG:** Multi-agent collaboration (Detective, Forecaster, Advisor, Risk) employing Retrieval-Augmented Generation for deep document intelligence.  
-🔐 **Enterprise Security:** Stateless JWT authentication, role-based access, and API rate limiting.  
-📊 **Deterministic Analytics:** High-performance risk calculation engines for Value at Risk (VaR), Sharpe Ratio, and portfolio scoring.  
-🐳 **Fully Containerized:** Deployment-ready with Docker and `docker-compose`.
+🚀 **Autonomous Workforce:** Multi-agent collaboration (Detective, Forecaster, Advisor) with native budget caps and heartbeat monitoring.  
+📉 **Shadow CFO Trust Engine:** Automatic confidence penalties for sparse or volatile data to ensure AI reliability.  
+📎 **Paperclip Governance:** Enterprise-grade orchestration using the v0.3.1 Plugin architecture for task checkouts and audit trails.  
+📊 **Deterministic Analytics:** High-performance risk calculation engines for VaR, Sharpe Ratio, and portfolio scoring.  
+🐳 **Fully Containerized:** One-click deployment with Docker and PowerShell bootstrapping.
 
 ---
 
@@ -57,48 +60,42 @@ graph TD
 
 | Layer | Technology | Purpose |
 | :--- | :--- | :--- |
-| **Frontend** | React 19, Next.js 16, TailwindCSS | Highly responsive, enterprise-grade UI |
-| **API Gateway** | Python, FastAPI | High-concurrency routing and state management |
-| **AI Orchestrator** | Google Gemini API, LangChain | Advanced reasoning and NLP extraction |
-| **Analytics Engine** | Python, Pandas, NumPy | Heavy parallel computation of risk metrics |
-| **Message Broker**| RabbitMQ | Asynchronous task queueing and decoupling |
+| **Control Plane** | Paperclip v0.3.1 | Agent orchestration & budget governance |
+| **Frontend** | React 19, Next.js 16 | Highly responsive, enterprise-grade UI |
+| **API Gateway** | Python, FastAPI | High-concurrency routing & state management |
+| **AI Orchestrator** | Google Gemini API | Advanced reasoning & NLP extraction |
+| **Analytics Engine**| Python, Pandas | Heavy parallel computation of risk metrics |
+| **Message Broker**| RabbitMQ | Asynchronous task decoupling |
 | **Database** | PostgreSQL 13 | Durable, acid-compliant data persistence |
 
 ---
 
 ## 🚀 Getting Started
 
-Launch the entire ecosystem locally with zero configuration friction.
-
 ### Prerequisites
 
-- [Docker](https://www.docker.com/products/docker-desktop) & Docker Compose installed.
-- API Key from Google (Gemini AI).
+- [Docker Desktop](https://www.docker.com/products/docker-desktop) installed.
+- Google Gemini API Key.
 
-### Quick Setup
+### Quick Setup (One-Click Autonomous Mode)
 
-1. **Clone the repository & Navigate to project**
-   ```bash
-   git clone <your-repository-url>
-   cd financial_analyst
-   ```
-
-2. **Configure Environment**
-   Create a `.env` file in the root based on `.env.example`:
+1. **Configure Environment**
+   Set your keys and Paperclip IDs in `.env`:
    ```env
-   GEMINI_API_KEY=your_gemini_api_key_here
-   SECRET_KEY=your_secure_jwt_secret
+   GEMINI_API_KEY=your_key
+   PAPERCLIP_COMPANY_ID=your_id
    ```
 
-3. **Deploy the Cluster**
-   ```bash
-   docker-compose up --build -d
+2. **Boot the System**
+   Run the unified bootstrap script from PowerShell:
+   ```powershell
+   .\scripts\bootstrap_system.ps1
    ```
 
-4. **Access the Application**
+3. **Access**
    - **Frontend UI:** [http://localhost:3000](http://localhost:3000)
-   - **API Swagger Docs:** [http://localhost:8000/docs](http://localhost:8000/docs)
-   - **RabbitMQ Dashboard:** [http://localhost:15672](http://localhost:15672) *(guest/guest)*
+   - **Paperclip Control Plane:** [http://localhost:3100](http://localhost:3100)
+   - **API Docs:** [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ---
 

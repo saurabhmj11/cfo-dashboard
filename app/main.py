@@ -1,13 +1,16 @@
 from fastapi import FastAPI
-from app.routers import analysis, chat, system, auth, actions, integrations, feedback, ingestion, market, search, reports
+from app.routers import analysis, chat, system, auth, actions, integrations, feedback, ingestion, market, search, reports, settings
+from app.services.paperclip.worker import paperclip_worker
 import asyncio
 from contextlib import asynccontextmanager
-from app.services.consumer import start_consumer
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    task = asyncio.create_task(start_consumer())
+    # Start Paperclip Monolith Worker in background
+    task = asyncio.create_task(paperclip_worker.start())
     yield
+    # Cleanup
+    await paperclip_worker.stop()
     task.cancel()
 
 app = FastAPI(title="AI Financial Analyst API", version="1.6.0", lifespan=lifespan)
@@ -28,7 +31,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"], 
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -46,6 +54,7 @@ app.include_router(ingestion.router)
 app.include_router(market.router)
 app.include_router(search.router)
 app.include_router(reports.router)
+app.include_router(settings.router)
 
 # Create Database Tables
 from app.database import engine

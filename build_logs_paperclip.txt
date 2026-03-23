@@ -1,0 +1,382 @@
+time="2026-03-22T12:15:12+05:30" level=warning msg="F:\\product\\dashboard\\financial_analyst\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image financial_analyst-paperclip Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 565B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 2.10kB 0.1s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/node:lts-trixie-slim
+#3 DONE 1.2s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 129B done
+#4 DONE 0.0s
+
+#5 [base 1/3] FROM docker.io/library/node:lts-trixie-slim@sha256:8c8f12cedb96c3b59642cf30d713943c2b223990c9919b96a141681f62e6e292
+#5 DONE 0.0s
+
+#6 [base 3/3] RUN corepack enable
+#6 CACHED
+
+#7 [base 2/3] RUN apt-get update   && apt-get install -y --no-install-recommends ca-certificates curl git   && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [deps  1/16] WORKDIR /app
+#8 CACHED
+
+#9 [internal] load build context
+#9 transferring context: 78.33kB 0.5s done
+#9 DONE 0.5s
+
+#10 [deps  2/16] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml .npmrc ./
+#10 CACHED
+
+#11 [deps 13/16] COPY packages/adapters/openclaw-gateway/package.json packages/adapters/openclaw-gateway/
+#11 CACHED
+
+#12 [deps  8/16] COPY packages/adapter-utils/package.json packages/adapter-utils/
+#12 CACHED
+
+#13 [deps  4/16] COPY server/package.json server/
+#13 CACHED
+
+#14 [deps 15/16] COPY packages/adapters/pi-local/package.json packages/adapters/pi-local/
+#14 CACHED
+
+#15 [deps  9/16] COPY packages/adapters/claude-local/package.json packages/adapters/claude-local/
+#15 CACHED
+
+#16 [deps 14/16] COPY packages/adapters/opencode-local/package.json packages/adapters/opencode-local/
+#16 CACHED
+
+#17 [deps 12/16] COPY packages/adapters/gemini-local/package.json packages/adapters/gemini-local/
+#17 CACHED
+
+#18 [deps  7/16] COPY packages/db/package.json packages/db/
+#18 CACHED
+
+#19 [deps  3/16] COPY cli/package.json cli/
+#19 CACHED
+
+#20 [deps  6/16] COPY packages/shared/package.json packages/shared/
+#20 CACHED
+
+#21 [deps  5/16] COPY ui/package.json ui/
+#21 CACHED
+
+#22 [deps 10/16] COPY packages/adapters/codex-local/package.json packages/adapters/codex-local/
+#22 CACHED
+
+#23 [build 2/6] COPY --from=deps /app /app
+#23 CACHED
+
+#24 [deps 11/16] COPY packages/adapters/cursor-local/package.json packages/adapters/cursor-local/
+#24 CACHED
+
+#25 [deps 16/16] RUN pnpm install --frozen-lockfile
+#25 CACHED
+
+#26 [build 3/6] COPY . .
+#26 CACHED
+
+#27 [build 4/6] RUN pnpm --filter @paperclipai/ui build
+#27 2.417 ! Corepack is about to download https://registry.npmjs.org/pnpm/-/pnpm-9.15.4.tgz
+#27 5.777 
+#27 5.777 > @paperclipai/ui@0.0.1 build /app/ui
+#27 5.777 > tsc -b && vite build
+#27 5.777 
+#27 52.76 vite v6.4.1 building for production...
+#27 52.95 transforming...
+#27 141.1 Γ£ô 4755 modules transformed.
+#27 146.2 rendering chunks...
+#27 152.1 computing gzip size...
+#27 153.5 dist/index.html                                           2.21 kB Γöé gzip:   0.86 kB
+#27 153.5 dist/assets/index-DMKgkynP.css                          222.76 kB Γöé gzip:  35.73 kB
+#27 153.5 dist/assets/clone-DFsgAyA-.js                             0.10 kB Γöé gzip:   0.11 kB
+#27 153.5 dist/assets/channel-BpTM9gRE.js                           0.11 kB Γöé gzip:   0.13 kB
+#27 153.5 dist/assets/init-Gi6I4Gst.js                              0.15 kB Γöé gzip:   0.13 kB
+#27 153.5 dist/assets/chunk-QZHKN3VN-CyBCxhxN.js                    0.19 kB Γöé gzip:   0.16 kB
+#27 153.5 dist/assets/chunk-55IACEB6-BchwjM6T.js                    0.24 kB Γöé gzip:   0.21 kB
+#27 153.5 dist/assets/chunk-4BX2VUAB-DeIp0x8Q.js                    0.30 kB Γöé gzip:   0.21 kB
+#27 153.5 dist/assets/diff-DbItnlRl.js                              0.31 kB Γöé gzip:   0.24 kB
+#27 153.5 dist/assets/chunk-FMBD7UC4-GISQQfnC.js                    0.37 kB Γöé gzip:   0.27 kB
+#27 153.5 dist/assets/stateDiagram-v2-4FDKWEC3-BV2ZWipM.js          0.39 kB Γöé gzip:   0.29 kB
+#27 153.5 dist/assets/classDiagram-2ON5EDUG-B_DW1VD8.js             0.43 kB Γöé gzip:   0.30 kB
+#27 153.5 dist/assets/classDiagram-v2-WZHVMYZB-B_DW1VD8.js          0.43 kB Γöé gzip:   0.30 kB
+#27 153.5 dist/assets/chunk-QN33PNHL-Bk0eyZG_.js                    0.53 kB Γöé gzip:   0.38 kB
+#27 153.5 dist/assets/brainfuck-C4LP7Hcl.js                         0.61 kB Γöé gzip:   0.33 kB
+#27 153.5 dist/assets/properties-C78fOPTZ.js                        0.67 kB Γöé gzip:   0.35 kB
+#27 153.5 dist/assets/infoDiagram-HS3SLOUP-BnMBMsgU.js              0.69 kB Γöé gzip:   0.46 kB
+#27 153.5 dist/assets/cmake-BQqOBYOt.js                             0.78 kB Γöé gzip:   0.46 kB
+#27 153.5 dist/assets/asciiarmor-Df11BRmG.js                        0.79 kB Γöé gzip:   0.41 kB
+#27 153.5 dist/assets/http-DBlCnlav.js                              0.85 kB Γöé gzip:   0.41 kB
+#27 153.5 dist/assets/protobuf-ChK-085T.js                          0.86 kB Γöé gzip:   0.52 kB
+#27 153.5 dist/assets/solr-DehyRSwq.js                              0.87 kB Γöé gzip:   0.46 kB
+#27 153.5 dist/assets/troff-wAsdV37c.js                             0.96 kB Γöé gzip:   0.44 kB
+#27 153.5 dist/assets/spreadsheet-BCZA_wO0.js                       1.14 kB Γöé gzip:   0.54 kB
+#27 153.5 dist/assets/toml-Bm5Em-hy.js                              1.14 kB Γöé gzip:   0.54 kB
+#27 153.5 dist/assets/ordinal-Cboi1Yqb.js                           1.19 kB Γöé gzip:   0.57 kB
+#27 153.5 dist/assets/mbox-CNhZ1qSd.js                              1.40 kB Γöé gzip:   0.66 kB
+#27 153.5 dist/assets/chunk-TZMSLE5B-DoxpnBJK.js                    1.44 kB Γöé gzip:   0.64 kB
+#27 153.5 dist/assets/sieve-C3Gn_uJK.js                             1.62 kB Γöé gzip:   0.77 kB
+#27 153.5 dist/assets/rpm-CTu-6PCP.js                               1.62 kB Γöé gzip:   0.83 kB
+#27 153.5 dist/assets/factor-kuTfRLto.js                            1.67 kB Γöé gzip:   0.61 kB
+#27 153.5 dist/assets/z80-Hz9HOZM7.js                               1.75 kB Γöé gzip:   0.81 kB
+#27 153.5 dist/assets/eiffel-CnydiIhH.js                            1.81 kB Γöé gzip:   0.92 kB
+#27 153.5 dist/assets/elm-vLlmbW-K.js                               1.89 kB Γöé gzip:   0.82 kB
+#27 153.5 dist/assets/mathematica-DTrFuWx2.js                       1.92 kB Γöé gzip:   0.82 kB
+#27 153.5 dist/assets/dockerfile-BKs6k2Af.js                        1.95 kB Γöé gzip:   0.67 kB
+#27 153.5 dist/assets/turtle-B1tBg_DP.js                            1.98 kB Γöé gzip:   0.90 kB
+#27 153.5 dist/assets/ebnf-CDyGwa7X.js                              1.99 kB Γöé gzip:   0.81 kB
+#27 153.5 dist/assets/smalltalk-CnHTOXQT.js                         2.01 kB Γöé gzip:   0.85 kB
+#27 153.5 dist/assets/dtd-DF_7sFjM.js                               2.06 kB Γöé gzip:   0.87 kB
+#27 153.5 dist/assets/mumps-BT43cFF4.js                             2.07 kB Γöé gzip:   0.98 kB
+#27 153.5 dist/assets/fcl-Kvtd6kyn.js                               2.08 kB Γöé gzip:   0.95 kB
+#27 153.5 dist/assets/ntriples-BfvgReVJ.js                          2.10 kB Γöé gzip:   0.75 kB
+#27 153.5 dist/assets/yacas-BJ4BC0dw.js                             2.15 kB Γöé gzip:   1.09 kB
+#27 153.5 dist/assets/simple-mode-GW_nhZxv.js                       2.28 kB Γöé gzip:   1.09 kB
+#27 153.5 dist/assets/apl-B4CMkyY2.js                               2.30 kB Γöé gzip:   1.23 kB
+#27 153.5 dist/assets/pascal--L3eBynH.js                            2.30 kB Γöé gzip:   1.19 kB
+#27 153.5 dist/assets/octave-Ck1zUtKM.js                            2.31 kB Γöé gzip:   1.09 kB
+#27 153.5 dist/assets/commonlisp-DBKNyK5s.js                        2.32 kB Γöé gzip:   1.10 kB
+#27 153.5 dist/assets/tcl-DVfN8rqt.js                               2.36 kB Γöé gzip:   1.23 kB
+#27 153.5 dist/assets/index-o-cO8F6B.js                             2.42 kB Γöé gzip:   1.50 kB
+#27 153.5 dist/assets/webidl-ZXfAyPTL.js                            2.52 kB Γöé gzip:   1.26 kB
+#27 153.5 dist/assets/pig-CevX1Tat.js                               2.53 kB Γöé gzip:   1.38 kB
+#27 153.5 dist/assets/puppet-DMA9R1ak.js                            2.54 kB Γöé gzip:   1.20 kB
+#27 153.5 dist/assets/forth-Ffai-XNe.js                             2.54 kB Γöé gzip:   1.33 kB
+#27 153.5 dist/assets/shell-CjFT_Tl9.js                             2.57 kB Γöé gzip:   1.21 kB
+#27 153.5 dist/assets/_basePickBy-CN69PFIB.js                       2.59 kB Γöé gzip:   1.29 kB
+#27 153.5 dist/assets/index-dmjgEtYD.js                             2.63 kB Γöé gzip:   1.50 kB
+#27 153.5 dist/assets/velocity-D8B20fx6.js                          2.67 kB Γöé gzip:   1.11 kB
+#27 153.5 dist/assets/tiddlywiki-DO-Gjzrf.js                        2.78 kB Γöé gzip:   1.07 kB
+#27 153.5 dist/assets/modelica-Dc1JOy9r.js                          2.79 kB Γöé gzip:   1.29 kB
+#27 153.5 dist/assets/oz-BzwKVEFT.js                                2.90 kB Γöé gzip:   1.28 kB
+#27 153.5 dist/assets/r-B6wPVr8A.js                                 2.94 kB Γöé gzip:   1.36 kB
+#27 153.5 dist/assets/stex-C3f8Ysf7.js                              3.12 kB Γöé gzip:   1.20 kB
+#27 153.5 dist/assets/tiki-DGYXhP31.js                              3.25 kB Γöé gzip:   1.26 kB
+#27 153.5 dist/assets/vhdl-lSbBsy5d.js                              3.35 kB Γöé gzip:   1.51 kB
+#27 153.5 dist/assets/lua-BgMRiT3U.js                               3.40 kB Γöé gzip:   1.44 kB
+#27 153.5 dist/assets/index-DAObaSNw.js                             3.40 kB Γöé gzip:   1.72 kB
+#27 153.5 dist/assets/arc-DwCsO1Ly.js                               3.42 kB Γöé gzip:   1.47 kB
+#27 153.5 dist/assets/mscgen-BA5vi2Kp.js                            3.51 kB Γöé gzip:   0.98 kB
+#27 153.5 dist/assets/sparql-DkYu6x3z.js                            3.55 kB Γöé gzip:   1.63 kB
+#27 153.5 dist/assets/cypher-C_CwsFkJ.js                            3.56 kB Γöé gzip:   1.52 kB
+#27 153.5 dist/assets/d-pRatUO7H.js                                 3.72 kB Γöé gzip:   1.68 kB
+#27 153.5 dist/assets/coffeescript-S37ZYGWr.js                      3.87 kB Γöé gzip:   1.69 kB
+#27 153.5 dist/assets/vb-CmGdzxic.js                                3.90 kB Γöé gzip:   1.79 kB
+#27 153.5 dist/assets/swift-BzpIVaGY.js                             3.96 kB Γöé gzip:   1.79 kB
+#27 153.5 dist/assets/asn1-EdZsLKOL.js                              3.98 kB Γöé gzip:   1.96 kB
+#27 153.5 dist/assets/q-pXgVlZs6.js                                 4.03 kB Γöé gzip:   1.67 kB
+#27 153.5 dist/assets/ttcn-cfg-B9xdYoR4.js                          4.05 kB Γöé gzip:   1.71 kB
+#27 153.5 dist/assets/dylan-DwRh75JA.js                             4.05 kB Γöé gzip:   1.65 kB
+#27 153.5 dist/assets/livescript-BwQOo05w.js                        4.09 kB Γöé gzip:   1.64 kB
+#27 153.5 dist/assets/groovy-D9Dt4D0W.js                            4.14 kB Γöé gzip:   1.77 kB
+#27 153.5 dist/assets/haskell-Cw1EW3IL.js                           4.17 kB Γöé gzip:   1.89 kB
+#27 153.5 dist/assets/diagram-S2PKOQOG-3RCNKbor.js                  4.34 kB Γöé gzip:   1.91 kB
+#27 153.5 dist/assets/asterisk-B-8jnY81.js                          4.48 kB Γöé gzip:   1.78 kB
+#27 153.5 dist/assets/gas-Bneqetm1.js                               4.57 kB Γöé gzip:   1.28 kB
+#27 153.5 dist/assets/fortran-DYz_wnZ1.js                           4.65 kB Γöé gzip:   2.01 kB
+#27 153.5 dist/assets/defaultLocale-DX6XiGOO.js                     4.69 kB Γöé gzip:   2.18 kB
+#27 153.5 dist/assets/mllike-CXdrOF99.js                            4.79 kB Γöé gzip:   1.53 kB
+#27 153.5 dist/assets/ttcn-CfJYG6tj.js                              4.80 kB Γöé gzip:   2.13 kB
+#27 153.5 dist/assets/index-BxXg41qQ.js                             5.07 kB Γöé gzip:   2.40 kB
+#27 153.5 dist/assets/ecl-Cabwm37j.js                               5.13 kB Γöé gzip:   2.31 kB
+#27 153.5 dist/assets/crystal-SjHAIU92.js                           5.13 kB Γöé gzip:   2.07 kB
+#27 153.5 dist/assets/ruby-B2Rjki9n.js                              5.16 kB Γöé gzip:   2.15 kB
+#27 153.5 dist/assets/pieDiagram-ADFJNKIX-BsKsJNsA.js               5.26 kB Γöé gzip:   2.34 kB
+#27 153.5 dist/assets/julia-DuME0IfC.js                             5.39 kB Γöé gzip:   2.14 kB
+#27 153.5 dist/assets/linear-D_7PZ8QE.js                            5.66 kB Γöé gzip:   2.31 kB
+#27 153.5 dist/assets/vbscript-BuJXcnF6.js                          5.82 kB Γöé gzip:   2.57 kB
+#27 153.5 dist/assets/mirc-CjQqDB4T.js                              5.92 kB Γöé gzip:   2.68 kB
+#27 153.5 dist/assets/graph-pJYVwtLM.js                             5.92 kB Γöé gzip:   1.87 kB
+#27 153.5 dist/assets/diagram-QEK2KX5R-D0nTQQOJ.js                  6.06 kB Γöé gzip:   2.55 kB
+#27 153.5 dist/assets/cobol-CWcv1MsR.js                             6.20 kB Γöé gzip:   2.96 kB
+#27 153.5 dist/assets/scheme-C41bIUwD.js                            6.37 kB Γöé gzip:   2.39 kB
+#27 153.5 dist/assets/python-BuPzkPfP.js                            6.48 kB Γöé gzip:   2.73 kB
+#27 153.5 dist/assets/xquery-DzFWVndE.js                            6.62 kB Γöé gzip:   2.56 kB
+#27 153.5 dist/assets/pug-DeIclll2.js                               6.67 kB Γöé gzip:   1.94 kB
+#27 153.5 dist/assets/textile-CnDTJFAw.js                           6.80 kB Γöé gzip:   2.44 kB
+#27 153.5 dist/assets/nsis-LdVXkNf5.js                              6.81 kB Γöé gzip:   2.99 kB
+#27 153.5 dist/assets/nginx-DdIZxoE0.js                             7.34 kB Γöé gzip:   2.72 kB
+#27 153.5 dist/assets/powershell-CFHJl5sT.js                        7.77 kB Γöé gzip:   3.33 kB
+#27 153.5 dist/assets/haxe-H-WmDvRZ.js                              7.89 kB Γöé gzip:   2.95 kB
+#27 153.5 dist/assets/erlang-BNw1qcRV.js                            8.10 kB Γöé gzip:   2.89 kB
+#27 153.5 dist/assets/verilog-C6RDOZhf.js                           8.24 kB Γöé gzip:   3.52 kB
+#27 153.5 dist/assets/sas-B4kiWyti.js                               9.33 kB Γöé gzip:   4.11 kB
+#27 153.5 dist/assets/perl-CdXCOZ3F.js                              9.75 kB Γöé gzip:   3.46 kB
+#27 153.5 dist/assets/gherkin-heZmZLOM.js                          10.16 kB Γöé gzip:   5.09 kB
+#27 153.5 dist/assets/stateDiagram-FKZM4ZOC-By77Vjh5.js            10.39 kB Γöé gzip:   3.64 kB
+#27 153.5 dist/assets/clojure-BMjYHr_A.js                          10.82 kB Γöé gzip:   3.99 kB
+#27 153.5 dist/assets/dagre-6UL2VRFP-C3v-3u2A.js                   11.27 kB Γöé gzip:   4.21 kB
+#27 153.5 dist/assets/idl-BEugSyMb.js                              11.63 kB Γöé gzip:   4.52 kB
+#27 153.5 dist/assets/_baseUniq-ox0LKa5j.js                        11.90 kB Γöé gzip:   4.65 kB
+#27 153.5 dist/assets/index-DBpcSStJ.js                            12.70 kB Γöé gzip:   5.59 kB
+#27 153.5 dist/assets/index-z2-Wffg9.js                            14.79 kB Γöé gzip:   5.97 kB
+#27 153.5 dist/assets/diagram-PSM6KHXK-GHUTADJ2.js                 15.98 kB Γöé gzip:   5.71 kB
+#27 153.5 dist/assets/index-CK-4AJQJ.js                            16.31 kB Γöé gzip:   7.44 kB
+#27 153.5 dist/assets/javascript-iXu5QeM3.js                       17.08 kB Γöé gzip:   5.75 kB
+#27 153.5 dist/assets/index-BvDZXk5G.js                            19.68 kB Γöé gzip:   9.29 kB
+#27 153.5 dist/assets/kanban-definition-3W4ZIXB7-CJDM-39w.js       20.61 kB Γöé gzip:   7.25 kB
+#27 153.5 dist/assets/index-D7X4K739.js                            20.92 kB Γöé gzip:   9.34 kB
+#27 153.5 dist/assets/mindmap-definition-VGOIOE7T-Bo9IJ5a9.js      21.04 kB Γöé gzip:   7.34 kB
+#27 153.5 dist/assets/sankeyDiagram-TZEHDZUN-B9zeZXnW.js           22.24 kB Γöé gzip:   8.15 kB
+#27 153.5 dist/assets/clike-B9uivgTg.js                            22.30 kB Γöé gzip:   7.86 kB
+#27 153.5 dist/assets/index-CwNZYNZ3.js                            23.06 kB Γöé gzip:  10.38 kB
+#27 153.5 dist/assets/journeyDiagram-XKPGCS4Q-Sjiw_ub2.js          23.54 kB Γöé gzip:   8.32 kB
+#27 153.5 dist/assets/timeline-definition-IT6M3QCI-Bp35Dom7.js     23.72 kB Γöé gzip:   8.28 kB
+#27 153.5 dist/assets/gitGraphDiagram-V2S2FVAM-CQGdWHeZ.js         24.73 kB Γöé gzip:   7.61 kB
+#27 153.5 dist/assets/erDiagram-Q2GNP2WA-DuvBtmPl.js               25.34 kB Γöé gzip:   8.87 kB
+#27 153.5 dist/assets/stylus-B533Al4x.js                           25.80 kB Γöé gzip:   8.60 kB
+#27 153.5 dist/assets/index-DLzv03cq.js                            25.85 kB Γöé gzip:  11.61 kB
+#27 153.5 dist/assets/index-FqayrtS9.js                            26.39 kB Γöé gzip:   8.81 kB
+#27 153.5 dist/assets/css-BnMrqG3P.js                              27.13 kB Γöé gzip:   8.47 kB
+#27 153.5 dist/assets/layout-DBKQkDGa.js                           27.39 kB Γöé gzip:   9.73 kB
+#27 153.5 dist/assets/index-ClQv4Isu.js                            28.69 kB Γöé gzip:  11.66 kB
+#27 153.5 dist/assets/requirementDiagram-UZGBJVZJ-Is-ANKEY.js      30.27 kB Γöé gzip:   9.50 kB
+#27 153.5 dist/assets/index-BDht3zfD.js                            30.79 kB Γöé gzip:  12.64 kB
+#27 153.5 dist/assets/index-vzRE7K37.js                            32.32 kB Γöé gzip:  13.06 kB
+#27 153.5 dist/assets/quadrantDiagram-AYHSOK5B-CnQym5js.js         34.33 kB Γöé gzip:  10.11 kB
+#27 153.5 dist/assets/chunk-DI55MBZ5-DXgGaZd8.js                   36.80 kB Γöé gzip:  11.98 kB
+#27 153.5 dist/assets/sql-D0XecflT.js                              37.05 kB Γöé gzip:  10.94 kB
+#27 153.5 dist/assets/xychartDiagram-PRI3JC2R-BiAvCcn0.js          40.21 kB Γöé gzip:  11.45 kB
+#27 153.5 dist/assets/index-DF_NJaJe.js                            40.73 kB Γöé gzip:  16.74 kB
+#27 153.5 dist/assets/index-xrVaVxV_.js                            44.15 kB Γöé gzip:  15.31 kB
+#27 153.5 dist/assets/index-7SlLcHg3.js                            45.10 kB Γöé gzip:  19.16 kB
+#27 153.5 dist/assets/chunk-B4BG7PRW-BaCzuaWV.js                   45.41 kB Γöé gzip:  14.73 kB
+#27 153.5 dist/assets/flowDiagram-NV44I4VS-D7kDlTRq.js             61.11 kB Γöé gzip:  19.59 kB
+#27 153.5 dist/assets/ganttDiagram-JELNMOA3-D2-R699q.js            68.31 kB Γöé gzip:  23.15 kB
+#27 153.5 dist/assets/c4Diagram-YG6GDRKO-CA--nmf-.js               70.16 kB Γöé gzip:  19.70 kB
+#27 153.5 dist/assets/index-DYnzure6.js                            70.81 kB Γöé gzip:  25.84 kB
+#27 153.5 dist/assets/blockDiagram-VD42YOAC-D9hOfstL.js            73.16 kB Γöé gzip:  20.83 kB
+#27 153.5 dist/assets/cose-bilkent-S5V4N54A-DClnMN7D.js            81.72 kB Γöé gzip:  22.48 kB
+#27 153.5 dist/assets/index-DbkYvWLl.js                            86.63 kB Γöé gzip:  34.40 kB
+#27 153.5 dist/assets/index-DtT-twCf.js                            97.86 kB Γöé gzip:  28.45 kB
+#27 153.5 dist/assets/sequenceDiagram-WL72ISMW-EOUKRuky.js         98.14 kB Γöé gzip:  26.97 kB
+#27 153.5 dist/assets/index-CnjUz4xK.js                           100.55 kB Γöé gzip:  33.62 kB
+#27 153.5 dist/assets/architectureDiagram-VXUJARFQ-BFh26iwl.js    148.97 kB Γöé gzip:  42.22 kB
+#27 153.5 dist/assets/katex-O9d3_IXG.js                           258.51 kB Γöé gzip:  76.88 kB
+#27 153.5 dist/assets/cytoscape.esm-BQaXIfA_.js                   442.44 kB Γöé gzip: 141.91 kB
+#27 153.5 dist/assets/treemap-GDKQZRPO-BqXO7SoZ.js                454.82 kB Γöé gzip: 107.87 kB
+#27 153.5 dist/assets/mermaid.core-COeXWIXq.js                    498.37 kB Γöé gzip: 139.93 kB
+#27 153.5 dist/assets/index-CSUWHuOn.js                         2,726.51 kB Γöé gzip: 786.65 kB
+#27 153.5 
+#27 153.5 (!) Some chunks are larger than 500 kB after minification. Consider:
+#27 153.5 - Using dynamic import() to code-split the application
+#27 153.5 - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+#27 153.5 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+#27 153.5 Γ£ô built in 1m 41s
+#27 DONE 155.2s
+
+#28 [build 5/6] RUN pnpm --filter @paperclipai/server build
+#28 5.363 
+#28 5.363 > @paperclipai/server@0.3.1 build /app/server
+#28 5.363 > tsc && mkdir -p dist/onboarding-assets && cp -R src/onboarding-assets/. dist/onboarding-assets/
+#28 5.363 
+#28 25.79 src/app.ts(48,42): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+#28 25.79 src/routes/plugins.ts(48,37): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+#28 25.79 src/routes/plugins.ts(49,58): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+#28 25.79 src/routes/plugins.ts(717,15): error TS18046: 'err' is of type 'unknown'.
+#28 25.79 src/routes/plugins.ts(721,22): error TS18046: 'err' is of type 'unknown'.
+#28 25.79 src/routes/plugins.ts(722,22): error TS18046: 'err' is of type 'unknown'.
+#28 25.79 src/routes/plugins.ts(727,22): error TS18046: 'err' is of type 'unknown'.
+#28 25.79 src/routes/plugins.ts(728,22): error TS18046: 'err' is of type 'unknown'.
+#28 25.79 src/routes/plugins.ts(733,22): error TS18046: 'err' is of type 'unknown'.
+#28 25.79 src/routes/plugins.ts(734,22): error TS18046: 'err' is of type 'unknown'.
+#28 25.79 src/routes/plugins.ts(739,22): error TS18046: 'err' is of type 'unknown'.
+#28 25.79 src/routes/plugins.ts(740,22): error TS18046: 'err' is of type 'unknown'.
+#28 25.79 src/routes/plugins.ts(745,22): error TS18046: 'err' is of type 'unknown'.
+#28 25.79 src/routes/plugins.ts(746,22): error TS18046: 'err' is of type 'unknown'.
+#28 25.79 src/routes/plugins.ts(1606,13): error TS18046: 'rpcErr' is of type 'unknown'.
+#28 25.79 src/routes/plugins.ts(1713,9): error TS18046: 'err' is of type 'unknown'.
+#28 25.79 src/services/activity-log.ts(5,34): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+#28 25.79 src/services/plugin-event-bus.ts(24,47): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+#28 25.79 src/services/plugin-host-services.ts(13,8): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+#28 25.79 src/services/plugin-host-services.ts(522,17): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(528,17): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(537,20): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(546,20): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(549,18): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(555,18): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(562,46): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+#28 25.79 src/services/plugin-host-services.ts(576,19): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(594,21): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(600,17): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(616,19): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(640,17): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(674,18): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(677,17): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(684,18): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(689,17): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(695,28): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(715,33): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(734,34): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(759,18): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(764,17): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(770,20): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(775,20): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(781,26): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(787,27): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(800,18): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(807,17): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(814,20): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(828,20): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(837,18): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(846,17): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(852,19): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(859,20): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(866,20): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(885,18): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(897,17): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(903,20): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(915,20): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(924,20): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(955,18): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(979,25): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-host-services.ts(1086,19): error TS7006: Parameter 'params' implicitly has an 'any' type.
+#28 25.79 src/services/plugin-tool-dispatcher.ts(30,49): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+#28 25.79 src/services/plugin-tool-registry.ts(26,68): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+#28 25.79 src/services/plugin-worker-manager.ts(39,8): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+#28 25.79 src/services/plugin-worker-manager.ts(50,8): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+#28 25.87 /app/server:
+#28 25.87 ΓÇëERR_PNPM_RECURSIVE_RUN_FIRST_FAILΓÇë @paperclipai/server@0.3.1 build: `tsc && mkdir -p dist/onboarding-assets && cp -R src/onboarding-assets/. dist/onboarding-assets/`
+#28 25.87 Exit status 2
+#28 ERROR: process "/bin/sh -c pnpm --filter @paperclipai/server build" did not complete successfully: exit code: 2
+------
+ > [build 5/6] RUN pnpm --filter @paperclipai/server build:
+25.79 src/services/plugin-host-services.ts(955,18): error TS7006: Parameter 'params' implicitly has an 'any' type.
+25.79 src/services/plugin-host-services.ts(979,25): error TS7006: Parameter 'params' implicitly has an 'any' type.
+25.79 src/services/plugin-host-services.ts(1086,19): error TS7006: Parameter 'params' implicitly has an 'any' type.
+25.79 src/services/plugin-tool-dispatcher.ts(30,49): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+25.79 src/services/plugin-tool-registry.ts(26,68): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+25.79 src/services/plugin-worker-manager.ts(39,8): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+25.79 src/services/plugin-worker-manager.ts(50,8): error TS2307: Cannot find module '@paperclipai/plugin-sdk' or its corresponding type declarations.
+25.87 /app/server:
+25.87 ΓÇëERR_PNPM_RECURSIVE_RUN_FIRST_FAILΓÇë @paperclipai/server@0.3.1 build: `tsc && mkdir -p dist/onboarding-assets && cp -R src/onboarding-assets/. dist/onboarding-assets/`
+25.87 Exit status 2
+------
+Dockerfile:31
+
+--------------------
+
+  29 |     COPY . .
+
+  30 |     RUN pnpm --filter @paperclipai/ui build
+
+  31 | >>> RUN pnpm --filter @paperclipai/server build
+
+  32 |     RUN test -f server/dist/index.js || (echo "ERROR: server build output missing" && exit 1)
+
+  33 |     
+
+--------------------
+
+failed to solve: process "/bin/sh -c pnpm --filter @paperclipai/server build" did not complete successfully: exit code: 2
+
+
+
+View build details: docker-desktop://dashboard/build/default/default/mdgv6pu2n0beroy6qhs0ukvjt
+

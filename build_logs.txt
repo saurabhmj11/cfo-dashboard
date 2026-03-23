@@ -1,0 +1,360 @@
+time="2026-03-22T12:11:22+05:30" level=warning msg="F:\\product\\dashboard\\financial_analyst\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image financial_analyst-paperclip_adapter Building 
+ Image financial_analyst-backend Building 
+ Image financial_analyst-frontend Building 
+ Image financial_analyst-ai_orchestrator Building 
+ Image financial_analyst-paperclip Building 
+ Image financial_analyst-analytics_engine Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 3.27kB done
+#1 DONE 0.0s
+
+#2 [backend internal] load build definition from Dockerfile
+#2 transferring dockerfile: 440B 0.0s done
+#2 DONE 0.1s
+
+#3 [ai_orchestrator internal] load build definition from Dockerfile
+#3 transferring dockerfile: 389B 0.0s done
+#3 DONE 0.1s
+
+#4 [frontend internal] load build definition from Dockerfile
+#4 transferring dockerfile: 556B 0.0s done
+#4 DONE 0.1s
+
+#5 [paperclip_adapter internal] load build definition from Dockerfile
+#5 transferring dockerfile: 196B 0.0s done
+#5 DONE 0.1s
+
+#6 [analytics_engine internal] load build definition from Dockerfile
+#6 transferring dockerfile: 386B 0.1s done
+#6 DONE 0.2s
+
+#7 [paperclip internal] load build definition from Dockerfile
+#7 transferring dockerfile: 2.10kB 0.1s done
+#7 DONE 0.2s
+
+#8 [analytics_engine internal] load metadata for docker.io/library/python:3.12-slim
+#8 ...
+
+#9 [paperclip internal] load metadata for docker.io/library/node:lts-trixie-slim
+#9 DONE 3.5s
+
+#10 [frontend internal] load metadata for docker.io/library/node:18-alpine
+#10 DONE 3.6s
+
+#11 [backend internal] load metadata for docker.io/library/python:3.9-slim
+#11 DONE 3.6s
+
+#12 [paperclip_adapter internal] load metadata for docker.io/library/python:3.10-slim
+#12 DONE 3.6s
+
+#13 [paperclip internal] load .dockerignore
+#13 transferring context: 129B 0.0s done
+#13 DONE 0.1s
+
+#14 [backend internal] load .dockerignore
+#14 transferring context: 2B done
+#14 DONE 0.1s
+
+#15 [paperclip_adapter internal] load .dockerignore
+#15 transferring context: 2B done
+#15 DONE 0.1s
+
+#16 [frontend internal] load .dockerignore
+#16 transferring context: 135B 0.0s done
+#16 DONE 0.1s
+
+#17 [backend 1/6] FROM docker.io/library/python:3.9-slim@sha256:2d97f6910b16bd338d3060f261f53f144965f755599aab1acda1e13cf1731b1b
+#17 DONE 0.0s
+
+#18 [frontend internal] load build context
+#18 DONE 0.0s
+
+#19 [frontend builder 1/6] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+#19 DONE 0.0s
+
+#20 [paperclip_adapter internal] load build context
+#20 DONE 0.0s
+
+#21 [paperclip_adapter 1/5] FROM docker.io/library/python:3.10-slim@sha256:4ba18b066cee17f2696cf9a2ba564d7d5eb05a91d6a949326780aa7c6912160d
+#21 DONE 0.0s
+
+#22 [backend internal] load build context
+#22 ...
+
+#8 [analytics_engine internal] load metadata for docker.io/library/python:3.12-slim
+#8 DONE 3.8s
+
+#23 [frontend builder 2/6] WORKDIR /app
+#23 CACHED
+
+#20 [paperclip_adapter internal] load build context
+#20 transferring context: 64B 0.0s done
+#20 DONE 0.1s
+
+#24 [ai_orchestrator internal] load .dockerignore
+#24 transferring context: 2B done
+#24 DONE 0.1s
+
+#22 [backend internal] load build context
+#22 transferring context: 4.45kB 0.0s done
+#22 DONE 0.1s
+
+#25 [analytics_engine internal] load .dockerignore
+#25 transferring context: 2B done
+#25 DONE 0.1s
+
+#18 [frontend internal] load build context
+#18 transferring context: 2.42kB 0.1s done
+#18 DONE 0.2s
+
+#26 [paperclip_adapter 3/5] COPY requirements.txt .
+#26 CACHED
+
+#27 [paperclip_adapter 2/5] WORKDIR /app
+#27 CACHED
+
+#28 [paperclip_adapter 4/5] RUN pip install --no-cache-dir -r requirements.txt
+#28 CACHED
+
+#29 [paperclip_adapter 5/5] COPY main.py .
+#29 CACHED
+
+#30 [backend 5/6] RUN pip install --no-cache-dir -r requirements.txt
+#30 CACHED
+
+#31 [backend 4/6] COPY requirements.txt .
+#31 CACHED
+
+#32 [backend 3/6] RUN apt-get update && apt-get install -y gcc
+#32 CACHED
+
+#33 [backend 2/6] WORKDIR /app
+#33 CACHED
+
+#34 [backend 6/6] COPY . .
+#34 CACHED
+
+#35 [paperclip base 1/3] FROM docker.io/library/node:lts-trixie-slim@sha256:8c8f12cedb96c3b59642cf30d713943c2b223990c9919b96a141681f62e6e292
+#35 DONE 0.0s
+
+#36 [analytics_engine 1/5] FROM docker.io/library/python:3.12-slim@sha256:3d5ed973e45820f5ba5e46bd065bd88b3a504ff0724d85980dcd05eab361fcf4
+#36 DONE 0.0s
+
+#37 [paperclip base 2/3] RUN apt-get update   && apt-get install -y --no-install-recommends ca-certificates curl git   && rm -rf /var/lib/apt/lists/*
+#37 CACHED
+
+#38 [paperclip base 3/3] RUN corepack enable
+#38 CACHED
+
+#39 [paperclip deps  1/16] WORKDIR /app
+#39 CACHED
+
+#40 [frontend builder 3/6] COPY package*.json ./
+#40 CACHED
+
+#41 [backend] exporting to image
+#41 exporting layers done
+#41 writing image sha256:b8de346517058e82e60df71ab317cf15a67f942de0cc0f7b379daa9ddb43630c
+#41 ...
+
+#42 [ai_orchestrator internal] load build context
+#42 transferring context: 1.48kB 0.0s done
+#42 DONE 0.1s
+
+#43 [analytics_engine internal] load build context
+#43 transferring context: 441B 0.0s done
+#43 DONE 0.1s
+
+#41 [backend] exporting to image
+#41 writing image sha256:b8de346517058e82e60df71ab317cf15a67f942de0cc0f7b379daa9ddb43630c 0.0s done
+#41 naming to docker.io/library/financial_analyst-backend
+#41 naming to docker.io/library/financial_analyst-backend 0.1s done
+#41 DONE 0.2s
+
+#44 [ai_orchestrator 3/5] COPY requirements.txt .
+#44 CACHED
+
+#45 [ai_orchestrator 4/5] RUN pip install --no-cache-dir -r requirements.txt
+#45 CACHED
+
+#46 [ai_orchestrator 5/5] COPY ./app /app/app
+#46 CACHED
+
+#47 [analytics_engine 4/5] RUN pip install --no-cache-dir -r requirements.txt
+#47 CACHED
+
+#48 [analytics_engine 2/5] WORKDIR /app
+#48 CACHED
+
+#49 [analytics_engine 3/5] COPY requirements.txt .
+#49 CACHED
+
+#50 [paperclip_adapter] exporting to image
+#50 exporting layers done
+#50 writing image sha256:bf2fdd178f686f3767da638adab2011b49b4aac90d3b23096d268d752471d1b1 0.1s done
+#50 naming to docker.io/library/financial_analyst-paperclip_adapter 0.1s done
+#50 DONE 0.2s
+
+#51 [analytics_engine 5/5] COPY ./app /app/app
+#51 CACHED
+
+#52 [ai_orchestrator] exporting to image
+#52 exporting layers done
+#52 writing image sha256:40c13d3d279f4c2babf3f4ca8e477d96a3e6bf27fc4c6415a32cbcde06289d08 0.0s done
+#52 naming to docker.io/library/financial_analyst-ai_orchestrator 0.0s done
+#52 DONE 0.3s
+
+#53 [analytics_engine] exporting to image
+#53 exporting layers done
+#53 writing image sha256:05e1596fb7e9b7de0b4c34fbf7e02e67a0338b6b2e4812529daa8bdb001eada6 0.0s done
+#53 naming to docker.io/library/financial_analyst-analytics_engine 0.0s done
+#53 DONE 0.2s
+
+#54 [paperclip internal] load build context
+#54 transferring context: 78.33kB 0.9s done
+#54 DONE 1.1s
+
+#55 [paperclip_adapter] resolving provenance for metadata file
+#55 DONE 0.3s
+
+#56 [ai_orchestrator] resolving provenance for metadata file
+#56 DONE 0.0s
+
+#57 [analytics_engine] resolving provenance for metadata file
+#57 DONE 0.1s
+
+#58 [backend] resolving provenance for metadata file
+#58 DONE 0.2s
+
+#59 [paperclip deps 13/16] COPY packages/adapters/openclaw-gateway/package.json packages/adapters/openclaw-gateway/
+#59 CACHED
+
+#60 [paperclip deps  6/16] COPY packages/shared/package.json packages/shared/
+#60 CACHED
+
+#61 [paperclip deps  2/16] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml .npmrc ./
+#61 CACHED
+
+#62 [paperclip deps  4/16] COPY server/package.json server/
+#62 CACHED
+
+#63 [paperclip deps  7/16] COPY packages/db/package.json packages/db/
+#63 CACHED
+
+#64 [paperclip deps  9/16] COPY packages/adapters/claude-local/package.json packages/adapters/claude-local/
+#64 CACHED
+
+#65 [paperclip deps 12/16] COPY packages/adapters/gemini-local/package.json packages/adapters/gemini-local/
+#65 CACHED
+
+#66 [paperclip deps 16/16] RUN pnpm install --frozen-lockfile
+#66 CACHED
+
+#67 [paperclip deps 14/16] COPY packages/adapters/opencode-local/package.json packages/adapters/opencode-local/
+#67 CACHED
+
+#68 [paperclip build 2/6] COPY --from=deps /app /app
+#68 CACHED
+
+#69 [paperclip deps 11/16] COPY packages/adapters/cursor-local/package.json packages/adapters/cursor-local/
+#69 CACHED
+
+#70 [paperclip deps  3/16] COPY cli/package.json cli/
+#70 CACHED
+
+#71 [paperclip deps  5/16] COPY ui/package.json ui/
+#71 CACHED
+
+#72 [paperclip deps  8/16] COPY packages/adapter-utils/package.json packages/adapter-utils/
+#72 CACHED
+
+#73 [paperclip deps 15/16] COPY packages/adapters/pi-local/package.json packages/adapters/pi-local/
+#73 CACHED
+
+#74 [paperclip deps 10/16] COPY packages/adapters/codex-local/package.json packages/adapters/codex-local/
+#74 CACHED
+
+#75 [paperclip build 3/6] COPY . .
+#75 CACHED
+
+#76 [paperclip build 4/6] RUN pnpm --filter @paperclipai/ui build
+#76 1.360 ! Corepack is about to download https://registry.npmjs.org/pnpm/-/pnpm-9.15.4.tgz
+#76 ...
+
+#77 [frontend builder 4/6] RUN npm ci
+#77 5.097 npm error code ERESOLVE
+#77 5.097 npm error ERESOLVE could not resolve
+#77 5.097 npm error
+#77 5.097 npm error While resolving: lucide-react@0.300.0
+#77 5.097 npm error Found: react@19.2.3
+#77 5.097 npm error node_modules/react
+#77 5.097 npm error   react@"19.2.3" from the root project
+#77 5.097 npm error   peer react@"^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0" from next@16.1.6
+#77 5.097 npm error   node_modules/next
+#77 5.097 npm error     next@"16.1.6" from the root project
+#77 5.097 npm error   5 more (react-dom, react-smooth, react-transition-group, ...)
+#77 5.097 npm error
+#77 5.097 npm error Could not resolve dependency:
+#77 5.097 npm error peer react@"^16.5.1 || ^17.0.0 || ^18.0.0" from lucide-react@0.300.0
+#77 5.097 npm error node_modules/lucide-react
+#77 5.097 npm error   lucide-react@"^0.300.0" from the root project
+#77 5.097 npm error
+#77 5.097 npm error Conflicting peer dependency: react@18.3.1
+#77 5.097 npm error node_modules/react
+#77 5.097 npm error   peer react@"^16.5.1 || ^17.0.0 || ^18.0.0" from lucide-react@0.300.0
+#77 5.097 npm error   node_modules/lucide-react
+#77 5.097 npm error     lucide-react@"^0.300.0" from the root project
+#77 5.097 npm error
+#77 5.097 npm error Fix the upstream dependency conflict, or retry
+#77 5.097 npm error this command with --force or --legacy-peer-deps
+#77 5.097 npm error to accept an incorrect (and potentially broken) dependency resolution.
+#77 5.097 npm error
+#77 5.097 npm error
+#77 5.097 npm error For a full report see:
+#77 5.097 npm error /root/.npm/_logs/2026-03-22T06_41_32_650Z-eresolve-report.txt
+#77 5.102 npm notice
+#77 5.102 npm notice New major version of npm available! 10.8.2 -> 11.12.0
+#77 5.102 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.12.0
+#77 5.102 npm notice To update run: npm install -g npm@11.12.0
+#77 5.102 npm notice
+#77 5.103 npm error A complete log of this run can be found in: /root/.npm/_logs/2026-03-22T06_41_32_650Z-debug-0.log
+#77 ERROR: process "/bin/sh -c npm ci" did not complete successfully: exit code: 1
+
+#76 [paperclip build 4/6] RUN pnpm --filter @paperclipai/ui build
+#76 CANCELED
+------
+ > [frontend builder 4/6] RUN npm ci:
+5.097 npm error
+5.097 npm error
+5.097 npm error For a full report see:
+5.097 npm error /root/.npm/_logs/2026-03-22T06_41_32_650Z-eresolve-report.txt
+5.102 npm notice
+5.102 npm notice New major version of npm available! 10.8.2 -> 11.12.0
+5.102 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.12.0
+5.102 npm notice To update run: npm install -g npm@11.12.0
+5.102 npm notice
+5.103 npm error A complete log of this run can be found in: /root/.npm/_logs/2026-03-22T06_41_32_650Z-debug-0.log
+------
+Dockerfile:7
+
+--------------------
+
+   5 |     WORKDIR /app
+
+   6 |     COPY package*.json ./
+
+   7 | >>> RUN npm ci
+
+   8 |     COPY . .
+
+   9 |     RUN npm run build
+
+--------------------
+
+target frontend: failed to solve: process "/bin/sh -c npm ci" did not complete successfully: exit code: 1
+
+
+
+View build details: docker-desktop://dashboard/build/default/default/lmpo6k5o27vgs5lasrjy3d2l3
+
